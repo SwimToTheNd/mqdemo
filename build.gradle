@@ -1,0 +1,53 @@
+buildscript {
+    ext {
+        // springboot 插件版本号
+//        pluginSpringBootVer = "1.5.14.RELEASE"
+    }
+    repositories {
+        maven {
+            url 'http://localhost:8081/repository/maven-public/'
+        }
+    }
+    // 插件依赖
+    dependencies {
+        // springboot插件
+//        classpath "org.springframework.boot:spring-boot-gradle-plugin:${pluginSpringBootVer}"
+        // gradle依赖管理
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.5.RELEASE"
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    apply plugin: 'eclipse'
+    // 应用gradle依赖管理插件
+    apply plugin: 'io.spring.dependency-management'
+    // 应用springboot插件
+//    apply plugin: "org.springframework.boot"
+
+    // 全局变量
+    ext {
+//        springBootVersion = "1.5.14.RELEASE"
+    }
+
+    // 仓库
+    repositories {
+        maven {
+            url 'http://localhost:8081/repository/maven-public/'
+        }
+    }
+    // 依赖管理，使用依赖管理插件
+    dependencyManagement {
+        imports {
+            // spring-boot依赖版本号
+//            mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+        }
+    }
+    // 添加依赖
+    dependencies {
+//        testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.14.RELEASE'
+        testImplementation 'junit:junit:4.12'
+    }
+
+}
